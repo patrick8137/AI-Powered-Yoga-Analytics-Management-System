@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Pay Monthly Fees{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="glass-card p-4">
+        <h4 class="mb-3">Monthly Fees</h4>
+
+        {% if fee %}
+            <table class="table table-borderless">
+                <tr>
+                    <th>Month</th>
+                    <td>{{ fee.month|date:"F Y" }}</td>
+                </tr>
+                <tr>
+                    <th>Amount</th>
+                    <td>₹ {{ fee.amount }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td class="text-danger">Unpaid</td>
+                </tr>
+            </table>
+
+            <form method="post">
+                {% csrf_token %}
+                <button class="btn btn-success">Pay Now</button>
+            </form>
+        {% else %}
+            <p class="text-success mb-0">
+                No pending fees !
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

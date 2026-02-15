@@ -1,0 +1,146 @@
+/* ================= ROOT & GLOBAL ================= */
+:root {
+    --sage-brand: #5B8266;
+    --sage-light: #889D8B;
+    --cream-bg: #F8F5F0;
+    --earth-brown: #4B3F35;
+    --charcoal: #3D3D3D;
+    --white: #FFFFFF;
+    --border-soft: #E8F0EB;
+}
+
+body {
+    background-color: var(--cream-bg);
+    color: var(--charcoal);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    background-color: var(--sage-brand) !important;
+    border-bottom: 1px solid var(--border-soft);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    color: var(--white) !important;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.nav-link:hover {
+    color: var(--white) !important;
+    opacity: 1;
+}
+
+/* ================= CARDS (The "Glass" Look) ================= */
+.glass-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    color: var(--charcoal) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+/* ================= PROFILE ================= */
+.profile-header {
+    background-color: var(--white);
+    border: 1px solid var(--border-soft);
+}
+/* ================= TEXT & TYPOGRAPHY ================= */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+.text-secondary {
+    color: var(--sage-light) !important;
+}
+
+.text-success {
+    color: var(--sage-brand) !important;
+}
+
+/* ================= BUTTONS ================= */
+.btn-primary {
+    background-color: var(--sage-brand) !important;
+    border-color: var(--sage-brand) !important;
+    color: var(--white) !important;
+    font-weight: 500;
+    padding: 0.6rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--earth-brown) !important;
+    border-color: var(--earth-brown) !important;
+    transform: translateY(-1px);
+}
+
+.btn-outline-primary, .btn-outline-sage {
+    color: var(--sage-brand) !important;
+    border: 1.5px solid var(--sage-brand) !important;
+    background: transparent;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.btn-outline-primary:hover, .btn-outline-sage:hover {
+    background-color: var(--sage-brand) !important;
+    color: var(--white) !important;
+}
+
+/* ================= BADGES ================= */
+.bg-primary {
+    background-color: var(--sage-brand) !important;
+}
+
+.badge-ai {
+    background-color: rgba(91, 130, 102, 0.1);
+    color: var(--sage-brand);
+    border: 1px solid var(--sage-brand);
+}
+/* ================= TABLES & LISTS ================= */
+.list-group-item {
+    background-color: transparent !important;
+    border-color: var(--border-soft) !important;
+    color: var(--charcoal);
+    padding: 1.2rem 1rem;
+}
+
+/* ================= FORM INPUTS ================= */
+.form-control {
+    background-color: var(--white) !important;
+    border: 1.5px solid var(--border-soft) !important;
+    color: var(--charcoal) !important;
+    border-radius: 10px;
+    padding: 0.75rem;
+}
+
+.form-control:focus {
+    border-color: var(--sage-brand) !important;
+    box-shadow: 0 0 0 4px rgba(91, 130, 102, 0.1) !important;
+}
+
+/* ================= HOVER EFFECTS ================= */
+.hover-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(75, 63, 53, 0.08);
+    border-color: var(--sage-light);
+}
+
+/* ================= CHARTS ================= */
+canvas {
+    margin-top: 10px;
+    max-width: 100%;
+}

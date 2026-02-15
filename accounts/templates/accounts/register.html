@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+
+        <div class="glass-card p-4 mt-5">
+
+            <h4 class="mb-2 text-center">Create Account</h4>
+            <p class="text-secondary text-center mb-4">
+                Join Yoga Analytics to track your progress
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label text-secondary">Username</label>
+                    <input type="text"
+                           name="username"
+                           class="form-control"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-secondary">Email</label>
+                    <input type="email"
+                           name="email"
+                           class="form-control"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-secondary">Password</label>
+                    <input type="password"
+                           name="password1"
+                           class="form-control"
+                           required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label text-secondary">Confirm Password</label>
+                    <input type="password"
+                           name="password2"
+                           class="form-control"
+                           required>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary w-100 rounded-pill">
+                    Register
+                </button>
+            </form>
+
+            <div class="text-center mt-4">
+                <span class="text-secondary">Already have an account?</span>
+                <a href="{% url 'login' %}"
+                   style="color:#3B82F6;text-decoration:none;">
+                    Login
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

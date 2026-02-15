@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Instructor Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="glass-card p-5 mb-5">
+    <h2 class="mb-0 d-flex align-items-center gap-2 text-secondary">
+        <span class="fw-semibold text-dark"> {{ instructor_name }} </span>
+        <span class="opacity-50">•</span>
+        <span class="small"> {{ instructor_email }} </span>
+    </h2>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">Instructor Dashboard</h2>
+            <p class="text-secondary mb-0">
+                Manage students, track attendance, and monitor progress.
+            </p>
+        </div>
+        
+        <a href="{% url 'inbox' %}" class="btn btn-outline-primary btn-sm rounded-pill px-4">
+            Messages
+        </a>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-3">
+        <a href="{% url 'instructor_students' %}" class="text-decoration-none">
+            <div class="glass-card p-4 text-center hover-card">
+                <small class="text-secondary">Total Students</small>
+                <h2 class="fw-bold text-dark">{{ total_students }}</h2> </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <div class="glass-card p-4 text-center">
+            <small class="text-secondary">Avg Practice (Weekly)</small>
+            <h2 class="fw-bold" style="color:#5B8266;"> {{ avg_practice }} hrs
+            </h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="glass-card p-4 text-center">
+            <small class="text-secondary">AI Insights</small>
+
+            {% if "attention" in ai_insight|lower %}
+                <h6 class="mt-2" style="color:#EF4444;">{{ ai_insight }}</h6>
+            {% elif "stable" in ai_insight|lower %}
+                <h6 class="mt-2" style="color:#5B8266;">{{ ai_insight }}</h6> {% elif "pending" in ai_insight|lower %}
+                <h6 class="mt-2 text-secondary">{{ ai_insight }}</h6>
+            {% else %}
+                <h6 class="mt-2 text-secondary">{{ ai_insight }}</h6>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="glass-card p-4 text-center">
+            <small class="text-secondary">Discipline Level</small>
+
+            {% if discipline_level == "Excellent" %}
+                <h2 style="color:#5B8266;">Excellent</h2> {% elif discipline_level == "Stable" %}
+                <h2 style="color:#4B3F35;">Stable</h2> {% else %}
+                <h2 style="color:#EF4444;">Needs Improvement</h2>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4 mb-5">
+
+    <div class="col-lg-6">
+        <div class="glass-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-dark mb-0">Attendance Trend</h6> <span class="badge rounded-pill"
+                      style="background:#5B8266;color:#FFFFFF;"> Last 7 Days
+                </span>
+            </div>
+            <canvas id="attendanceChart" height="120"></canvas>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="glass-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-dark mb-0">Avg Practice Hours</h6> <span class="badge rounded-pill"
+                      style="background:#4B3F35;color:#FFFFFF;"> Last 4 Weeks
+                </span>
+            </div>
+            <canvas id="practiceChart" height="120"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<h6 class="text-secondary mb-3">Instructor Actions</h6>
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-4">
+        <a href="{% url 'daily_activity' %}" class="text-decoration-none">
+            <div class="glass-card p-4 hover-card h-100"
+                 style="border-left:4px solid #5B8266;"> <h6 class="text-dark">Daily Activity</h6> <small class="text-secondary">Attendance & practice logging</small>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{% url 'attendance_history' %}" class="text-decoration-none">
+            <div class="glass-card p-4 hover-card h-100"
+                 style="border-left:4px solid #889D8B;"> <h6 class="text-dark">Attendance History</h6> <small class="text-secondary">Review student records</small>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{% url 'upload_document' %}" class="text-decoration-none">
+            <div class="glass-card p-4 hover-card h-100"
+                 style="border-left:4px solid #4B3F35;"> <h6 class="text-dark">Upload Materials</h6> <small class="text-secondary">PDFs & images for students</small>
+            </div>
+        </a>
+    </div>
+
+</div>
+
+<div class="glass-card p-4 mb-5">
+    <h5 class="text-dark mb-3">Uploaded Learning Materials</h5> {% if documents %}
+        <div class="list-group list-group-flush">
+            {% for doc in documents %}
+                <div class="list-group-item bg-transparent border-bottom border-light d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong class="text-dark">{{ doc.title }}</strong> <div class="text-secondary small">
+                            Uploaded {{ doc.uploaded_at|date:"M d, Y" }}
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <a href="{{ doc.file.url }}"
+                           target="_blank"
+                           class="btn btn-outline-success btn-sm"> View
+                        </a>
+
+                        <form method="post"
+                              action="{% url 'delete_document' doc.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-danger btn-sm">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-secondary mb-0">
+            No documents uploaded yet.
+        </p>
+    {% endif %}
+</div>
+
+<script>
+new Chart(document.getElementById('attendanceChart'), {
+    type: 'line',
+    data: {
+        labels: {{ attendance_labels|safe }},
+        datasets: [{
+            data: {{ attendance_trend|safe }},
+            borderColor: '#5B8266',
+            backgroundColor: 'rgba(91, 130, 102, 0.15)',
+            fill: true,
+            tension: 0.45,
+            pointRadius: 4
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+});
+
+new Chart(document.getElementById('practiceChart'), {
+    type: 'bar',
+    data: {
+        labels: {{ practice_labels|safe }},
+        datasets: [{
+            data: {{ practice_trend|safe }},
+            backgroundColor: '#889D8B', 
+            borderRadius: 10
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+</script>
+
+{% endblock %}

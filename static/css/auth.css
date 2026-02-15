@@ -1,0 +1,115 @@
+/* Auth page container */
+.auth-wrapper {
+    min-height: 85vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F8F5F0; 
+    padding-top: 80px; 
+}
+
+.auth-card {
+    background: #ffffff;
+    border-radius: 20px; 
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E8F0EB; 
+}
+
+/* Titles */
+.auth-title {
+    font-family: 'Georgia', serif; 
+    font-size: 28px;
+    font-weight: bold;
+    color: #3D3D3D;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    font-family: sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color: #889D8B; 
+    margin-bottom: 2rem;
+    letter-spacing: 0.5px;
+}
+
+/* Form labels */
+.auth-card .form-label {
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4A4A4A;
+    margin-bottom: 6px;
+}
+
+/* Inputs */
+.auth-card .form-control {
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    border: 1px solid #EEE;
+    background-color: #F9F9F9;
+    transition: border-color 0.3s;
+}
+
+.auth-card .form-control:focus {
+    border-color: #5B8266;
+    box-shadow: 0 0 0 3px rgba(91, 130, 102, 0.1);
+    outline: none;
+}
+
+.auth-card .btn-primary {
+    background-color: #5B8266;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.auth-card .btn-primary:hover {
+    background-color: #4a6b53;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: #666;
+}
+
+.auth-footer a {
+    color: #5B8266; 
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+    color: #4a6b53;
+}
+
+.auth-card .alert {
+    font-size: 13px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 1rem;
+    font-family: sans-serif;
+}
+
+.alert-danger {
+    background-color: #fff5f5;
+    color: #c53030;
+    border: 1px solid #fed7d7;
+}

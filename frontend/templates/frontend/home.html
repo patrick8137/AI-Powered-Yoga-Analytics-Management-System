@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Stretch Yoga</title>
+    <link rel="stylesheet" href="{% static 'frontend/css/landing.css' %}?v=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body id="top">
+
+<nav>
+    <div class="logo-container">
+        <div href="#top" class="logo-link">
+            <img src="{% static 'frontend/media/logo.png' %}" alt="Soft Stretch Yoga Logo" class="nav-logo-img">
+            <span class="logo-text">Soft Stretch Yoga</span>
+        </div>
+    </div>
+        <ul class="nav-links">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="{% url 'login' %}" class="btn-login">Login</a></li>
+    </ul>
+</nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Welcome to your practice</span>
+            <h1>Find Your <br><span class="text-green">Inner Peace</span></h1>
+            <p>Step into a world of relaxation and rejuvenation. Our yoga studio offers a peaceful escape where you can focus on your well-being.</p>
+            
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="scrollToSection('programs')">Explore Classes</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>10+</h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Happy Students</p>
+                </div>
+                <div class="stat-item">
+                    <h3>20+</h3>
+                    <p>Yoga Classes</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <div class="hero-img-container">
+                <img src="{% static 'frontend/media/photo-1544367567-0f2fcb009e0b.jpg' %}" alt="Yoga Pose">
+            </div>
+            <div class="quote-card">
+                <p>"Yoga leads a person toward self-realization and inner peace."</p>
+                <span>- The Bhagavad Gita</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-image">
+            <div class="about-img-container">
+                <img src="{% static 'frontend/media/photo-1506126613408-eca07ce68773.jpg' %}" alt="Meditation">
+            </div>
+            <div class="quote-card">
+                <p>"Yoga is the journey of the self, through the self, to the self."</p>
+                <span>- The Bhagavad Gita</span>
+            </div>
+        </div>
+        
+        <div class="about-content">
+            <span class="section-subtitle">About Us</span>
+            <h2 class="section-title">Your Sanctuary for <br><span class="text-green">Mind & Body</span></h2>
+            <div class="about-text">
+                <p>At Soft Stretch Yoga, we are dedicated to providing a sanctuary for yoga enthusiasts. Our mission is to create a nurturing environment where individuals can practice yoga, meditation, and mindfulness to improve their overall wellness.</p>
+                <br>
+                <p>We believe in the transformative power of yoga and aim to offer a range of classes that cater to different needs and abilities. Our experienced instructors are committed to guiding you on your yoga journey.</p>
+            </div>
+
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <div class="feature-icon">♥</div>
+                    <div class="feature-text">
+                        <h4>Mindful Practice</h4>
+                        <p>We believe in the transformative power of mindfulness and conscious movement.</p>
+                    </div>
+                </li>
+                <li class="feature-item">
+                    <div class="feature-icon">🍃</div>
+                    <div class="feature-text">
+                        <h4>Natural Healing</h4>
+                        <p>Connect with your body's natural ability to heal and restore balance.</p>
+                    </div>
+                </li>
+                <li class="feature-item">
+                    <div class="feature-icon">☀</div>
+                    <div class="feature-text">
+                        <h4>Inner Radiance</h4>
+                        <p>Discover the light within through dedicated practice and self-discovery.</p>
+                    </div>
+                </li>
+            </ul>
+            </div>
+    </section>
+
+    <section class="programs" id="programs">
+        <span class="section-subtitle" style="text-align: center;">Our Programs</span>
+        <h2 class="section-title">Explore Our <span class="text-green">Classes</span></h2>
+        <p style="font-family: sans-serif; color: #666; max-width: 600px; margin: 0 auto;">Whether you're a beginner or an experienced yogi, we have classes designed to meet your needs and help you grow in your practice.</p>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="{% static 'frontend/media/photo-1599901860904-17e6ed7083a0.jpg' %}" alt="Hatha Yoga">
+                    <span class="level-tag">All Levels</span>
+                </div>
+                <div class="program-details">
+                    <h3>Hatha Yoga</h3>
+                    <p>A gentle introduction to the most basic yoga postures. Perfect for beginners seeking balance and flexibility.</p>
+                    <div class="program-meta">
+                        <span>🕒 60 min</span>
+                        <span>👥 Small Groups</span>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="{% static 'frontend/media/photo-1575052814086-f385e2e2ad1b.jpg' %}" alt="Vinyasa Flow">
+                    <span class="level-tag">Intermediate</span>
+                </div>
+                <div class="program-details">
+                    <h3>Vinyasa Flow</h3>
+                    <p>Dynamic sequences that synchronize breath with movement for a more energetic practice.</p>
+                    <div class="program-meta">
+                        <span>🕒 75 min</span>
+                        <span>👥 Small Groups</span>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="{% static 'frontend/media/photo-1552196563-55cd4e45efb3.jpg' %}" alt="Yin Yoga">
+                    <span class="level-tag">All Levels</span>
+                </div>
+                <div class="program-details">
+                    <h3>Yin Yoga</h3>
+                    <p>Slow-paced style with postures held for longer periods. Targets deep connective tissues.</p>
+                    <div class="program-meta">
+                        <span>🕒 90 min</span>
+                        <span>👥 Small Groups</span>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="{% static 'frontend/media/photo-1508672019048-805c876b67e2.jpg' %}" alt="Meditation">
+                    <span class="level-tag">All Levels</span>
+                </div>
+                <div class="program-details">
+                    <h3>Meditation</h3>
+                    <p>Guided meditation sessions to calm the mind and cultivate inner peace and awareness.</p>
+                    <div class="program-meta">
+                        <span>🕒 45 min</span>
+                        <span>👥 Small Groups</span>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-header">
+            <span class="section-subtitle" style="text-align: center;">Get In Touch</span>
+            <h2 class="contact-title">Contact <span class="text-green">Us</span></h2>
+            <p style="font-family: sans-serif; color: #666; margin-top: 10px;">Have questions about our classes or want to schedule a visit? We'd love to hear from you.</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="icon-circle">📍</div>
+                    <h4>Visit Us</h4>
+                    <p>123 Serenity Lane</p>
+                    <p>Peaceful Valley, CA 90210</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="icon-circle">📞</div>
+                    <h4>Call Us</h4>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="icon-circle">✉</div>
+                    <h4>Email Us</h4>
+                    <a href="mailto:hello@softstretchyoga.com">hello@softstretchyoga.com</a>
+                </div>
+
+                <div class="info-card">
+                    <div class="icon-circle">🕒</div>
+                    <h4>Open Hours</h4>
+                    <p>Mon - Fri: 6am - 9pm</p>
+                    <p>Sat - Sun: 7am - 7pm</p>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <h3 style="margin-bottom: 20px;">Send Us a Message</h3>
+               <form id="contactForm" method="POST" action="{% url 'submit_contact' %}">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" name="name" required>
+    </div>
+
+    <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+        <label>Your Message</label>
+        <textarea name="message" required></textarea>
+    </div>
+
+    <button type="submit" class="btn-submit">Send Message</button>
+    <p id="contactSuccess"
+       style="display:none; margin-top:12px; color:#4CAF50; font-weight:500;">
+        ✅ Your message has been sent successfully. We’ll contact you soon.
+    </p>
+</form>
+
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img style height="80px" src="{% static 'frontend/media/logo1.png' %}" alt="Soft Stretch Yoga Logo" class="footer-logo-img">
+                <h2>Soft Stretch Yoga</h2>
+                <p>Your sanctuary for mindful movement, inner peace, and holistic wellness. Join our community and begin your transformation today.</p>
+                <div class="social-icons d-flex gap-3 justify-content-center">
+                    <a href="#" class="social-icon" title="Instagram">
+                         <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="YouTube">
+                         <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="mailto:your-email@example.com" class="social-icon" title="Email">
+                         <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="#">Hatha Yoga</a></li>
+                        <li><a href="#">Vinyasa Flow</a></li>
+                        <li><a href="#">Yin Yoga</a></li>
+                        <li><a href="#">Meditation</a></li>
+                    </ul>
+                </div>
+                <div class="link-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Schedule</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Soft Stretch Yoga. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const formData = new FormData(form);
+    const btn = form.querySelector('.btn-submit');
+    const successMsg = document.getElementById('contactSuccess');
+
+    btn.disabled = true;
+    btn.innerText = 'Sending...';
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            form.reset();
+            successMsg.style.display = 'block';
+            btn.innerText = 'Sent!';
+        } else {
+            btn.innerText = 'Try Again';
+        }
+    })
+    .catch(() => {
+        btn.innerText = 'Error';
+    })
+    .finally(() => {
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.innerText = 'Send Message';
+        }, 2000);
+    });
+});
+    </script>
+</body>
+</html>

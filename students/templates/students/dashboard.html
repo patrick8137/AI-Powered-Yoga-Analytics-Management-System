@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="glass-card profile-header p-4 mb-4 d-flex align-items-center gap-4">
+
+    {% if student.photo %}
+        <img src="{{ student.photo.url }}"
+             class="rounded-circle"
+             width="72" height="72"
+             style="object-fit: cover; border: 2px solid #5B8266;">
+    {% else %}
+        <div class="rounded-circle d-flex align-items-center justify-content-center"
+             style="width:72px;height:72px;background:#5B8266;color:#ffffff;font-size:28px;">
+            {{ student.user.first_name|slice:":1"|default:student.user.username|slice:":1"|upper }}
+        </div>
+    {% endif %}
+
+    <div>
+        <h5 class="mb-1 text-dark">
+            {{ student.user.get_full_name|default:student.user.username }}
+        </h5>
+        <small class="text-secondary">{{ student.user.email }}</small>
+
+        {% if instructor %}
+            <div class="mt-1">
+                <span class="badge rounded-pill px-3 py-1" style="background:#5B8266; color:white;">
+                    Instructor: {{ instructor.user.get_full_name|default:instructor.user.username }}
+                </span>
+            </div>
+        {% else %}
+            <div class="mt-1">
+                <span class="badge bg-secondary rounded-pill px-3 py-1">
+                    Instructor not assigned
+                </span>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="ms-auto d-flex gap-2">
+    <a href="{% url 'student_edit_profile' %}"
+       class="btn btn-outline-sage btn-sm rounded-pill px-4">
+        Edit Profile
+    </a>
+
+    <a href="{% url 'student_pay_fees' %}"
+       class="btn btn-outline-danger btn-sm rounded-pill px-4">
+        Pay Fees
+    </a>
+
+    <a href="{% url 'inbox' %}"
+       class="btn btn-outline-primary btn-sm rounded-pill px-4">
+        Messages
+    </a>
+</div>
+
+</div>
+
+{% if show_fee_warning %}
+<div class="glass-card p-4 mb-4 border border-warning">
+    <div class="d-flex align-items-center justify-content-between">
+        <div>
+            <h6 class="text-warning mb-1">⚠ Monthly Fee Pending</h6>
+            <p class="text-secondary mb-0">
+                Fee for <strong>{{ monthly_fee.month|date:"F Y" }}</strong><br>
+                Amount: <strong>₹{{ monthly_fee.amount }}</strong>
+            </p>
+        </div>
+
+        <a href="{% url 'student_pay_fees' %}"
+           class="btn btn-warning rounded-pill px-4">
+            Pay Now
+        </a>
+    </div>
+</div>
+{% endif %}
+
+{% if not student.user.first_name or not student.user.last_name or not student.age or not student.phone %}
+<div class="mb-4">
+    <span class="badge bg-warning text-dark rounded-pill px-3 py-1">
+        Complete your profile for better AI analysis
+    </span>
+</div>
+{% endif %}
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+        <div class="glass-card p-3 text-center">
+            <small class="text-secondary">Attendance (This Month)</small>
+            <h2 class="text-dark">{{ attendance_percent }}%</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="glass-card p-3 text-center">
+            <small class="text-secondary">Practice Hours (This Month)</small>
+            <h2 class="text-dark">{{ monthly_practice_hours }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="glass-card p-3 text-center">
+            <small class="text-secondary">Progress Score</small>
+            <h2 class="text-dark">{{ progress_score }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="glass-card p-3 text-center">
+            <small class="text-secondary">AI Status</small>
+
+            {% if ai_status == "Improving" %}
+                <h2 style="color:#5B8266;">{{ ai_status }}</h2>
+            {% elif ai_status == "Stable" %}
+                <h2 style="color:#4B3F35;">{{ ai_status }}</h2>
+            {% elif ai_status == "Needs Attention" %}
+                <h2 style="color:#EF4444;">{{ ai_status }}</h2>
+            {% else %}
+                <h2 class="text-secondary">{{ ai_status }}</h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4 mb-5">
+    <h5 class="text-dark mb-2">AI Recommendation</h5>
+    <p class="text-secondary mb-0">{{ ai_message }}</p>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6">
+        <div class="glass-card p-4">
+            <h6 class="mb-3 text-dark">Attendance Trend (Weekly)</h6>
+            <canvas id="attendanceChart"></canvas>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="glass-card p-4">
+            <h6 class="mb-3 text-dark">Practice Hours Trend (Weekly)</h6>
+            <canvas id="practiceChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="glass-card p-4 mt-4">
+    <h5 class="text-dark mb-3">Learning Materials</h5>
+
+    {% if documents %}
+        <div class="list-group list-group-flush">
+            {% for doc in documents %}
+                <div class="list-group-item bg-transparent border-bottom border-light d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong class="text-dark">{{ doc.title }}</strong>
+                        <div class="text-secondary small">
+                            Uploaded {{ doc.uploaded_at|date:"M d, Y" }}
+                        </div>
+                    </div>
+
+                    <a href="{{ doc.file.url }}"
+                       class="btn btn-outline-sage btn-sm"
+                       target="_blank">
+                        View
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-secondary mb-0">No learning materials uploaded yet.</p>
+    {% endif %}
+</div>
+<script>
+new Chart(document.getElementById('attendanceChart'), {
+    type: 'line',
+    data: {
+        labels: {{ attendance_labels|safe }},
+        datasets: [{
+            data: {{ attendance_data|safe }},
+            borderColor: '#5B8266',
+            backgroundColor: 'rgba(91, 130, 102, 0.15)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, max: 100 },
+            x: { ticks: { color: '#3D3D3D' } }
+        }
+    }
+});
+
+new Chart(document.getElementById('practiceChart'), {
+    type: 'bar',
+    data: {
+        labels: {{ practice_labels|safe }},
+        datasets: [{
+            data: {{ practice_data|safe }},
+            backgroundColor: '#889D8B',
+            borderRadius: 8
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true },
+            x: { ticks: { color: '#3D3D3D' } }
+        }
+    }
+});
+</script>
+
+{% endblock %}

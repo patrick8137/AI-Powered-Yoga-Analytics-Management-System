@@ -1,0 +1,12 @@
+/* Navbar text styling */
+.navbar-brand.brand {
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.3px;
+    color: #1e3a8a;
+}
+
+.navbar {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
