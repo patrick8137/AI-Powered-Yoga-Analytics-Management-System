@@ -14,9 +14,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY SETTINGS
 SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key')
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.railway.app']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
